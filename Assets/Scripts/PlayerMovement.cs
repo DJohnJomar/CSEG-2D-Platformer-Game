@@ -11,10 +11,14 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float jumpingPower = 16f;
     private bool isFacingRight = true;
 
-   
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Transform groundCheck;
     [SerializeField] private LayerMask groundLayer;
+
+    //For animation
+    public Animator animator;
+    public bool isJumping = false;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,17 +29,29 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         horizontal = Input.GetAxisRaw("Horizontal");
+
+        // For animation
+        animator.SetFloat("Speed", Mathf.Abs(horizontal));
+
+
         if(Input.GetButtonDown("Jump") && isGrounded())
         {
             rb.velocity = new Vector2(rb.velocity.y, jumpingPower);
+            animator.SetBool("IsJumping", true);
+            
+        } else{
+            animator.SetBool("IsJumping", false);
         }
 
         if(Input.GetButtonDown("Jump") && rb.velocity.y >0f)
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-        }
+            
+        } 
+       
         Flip();
     }
+
 
     private void FixedUpdate()
     {
