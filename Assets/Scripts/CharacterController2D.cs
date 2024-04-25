@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
-public class CharacterController : MonoBehaviour
+public class CharacterController2D : MonoBehaviour
 {
 
     [SerializeField] private Transform m_GroundCheck;
