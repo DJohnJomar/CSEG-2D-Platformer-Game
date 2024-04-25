@@ -19,10 +19,12 @@ public class PlayerMovement : MonoBehaviour
     public Animator animator;
     public bool isJumping = false;
 
+    AudioSource jumpSound;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        jumpSound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -36,17 +38,17 @@ public class PlayerMovement : MonoBehaviour
 
         if(Input.GetButtonDown("Jump") && isGrounded())
         {
+            jumpSound.Play();
             rb.velocity = new Vector2(rb.velocity.y, jumpingPower);
             animator.SetBool("IsJumping", true);
             
         } else{
-            animator.SetBool("IsJumping", false);
+            animator.SetBool("IsJumping", false); 
         }
 
         if(Input.GetButtonDown("Jump") && rb.velocity.y >0f)
         {
-            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);
-            
+            rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);   
         } 
        
         Flip();
