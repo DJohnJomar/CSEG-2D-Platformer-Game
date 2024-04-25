@@ -42,9 +42,7 @@ public class PlayerMovement : MonoBehaviour
             rb.velocity = new Vector2(rb.velocity.y, jumpingPower);
             animator.SetBool("IsJumping", true);
             
-        } else{
-            animator.SetBool("IsJumping", false); 
-        }
+        } 
 
         if(Input.GetButtonDown("Jump") && rb.velocity.y >0f)
         {
@@ -73,5 +71,10 @@ public class PlayerMovement : MonoBehaviour
             localScale.x *= -1f;
             transform.localScale = localScale;
         }
+    }
+
+    public void OnLanding()
+    {
+        animator.SetBool("IsJumping", false);
     }
 }
