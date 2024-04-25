@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-public class Respawn : MonoBehaviour
+
+public class LoadSceneOnCollision : MonoBehaviour
 {
-
-    public int respawn;
-
     // Start is called before the first frame update
+    public string sceneName;
     void Start()
     {
         
@@ -23,7 +22,8 @@ public class Respawn : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            SceneManager.LoadScene(respawn);
+            SceneManager.LoadScene(sceneName);
         }
     }
+
 }
