@@ -30,12 +30,13 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Gets horizontal movement, returns -1 if left, 1 if right
         horizontal = Input.GetAxisRaw("Horizontal");
 
         // For animation
         animator.SetFloat("Speed", Mathf.Abs(horizontal));
 
-
+        //For Jumping
         if(Input.GetButtonDown("Jump") && isGrounded())
         {
             jumpSound.Play();
@@ -48,11 +49,12 @@ public class PlayerMovement : MonoBehaviour
         {
             rb.velocity = new Vector2(rb.velocity.x, rb.velocity.y * 0.5f);   
         } 
-       
+       //Flips the character sprite left or right
         Flip();
     }
 
 
+    //Updates the player rb's velocity ~ makes it move
     private void FixedUpdate()
     {
         rb.velocity = new Vector2(horizontal * speed, rb.velocity.y);
@@ -62,6 +64,8 @@ public class PlayerMovement : MonoBehaviour
         return Physics2D.OverlapCircle(groundCheck.position, 0.2f, groundLayer);
     }
 
+    //Detects if facing left or right based on horizontal movement
+    //Changes the scale of the player
     private void Flip()
     {
         if(isFacingRight && horizontal <0f || !isFacingRight && horizontal >0f)
